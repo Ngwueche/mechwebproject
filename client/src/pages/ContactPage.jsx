@@ -78,7 +78,8 @@ export default function ContactPage() {
   function handleSubmit(e) {
     e.preventDefault();
     if (validateForm()) {
-    axios.post('/contact',{firstName, lastName, phone, email, subject, message})
+      axios.post('/contact',{firstName, lastName, phone, email, subject, message})
+      alert('Your request has been received. We will get back to you in a short time.');
   }
 }
 
