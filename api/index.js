@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const FormData = require("./models/formModel");
 const formModel = require("./models/formModel");
+const cors = require('cors');
 
 const app = express();
 
@@ -14,6 +15,7 @@ mongoose.connect("mongodb://127.0.0.1/mechweld", {
 .then(() => console.log("Connected to MongoDB"))
 .catch((err) => console.error("Error connecting to MongoDB", err));
 
+app.use(cors());
 // Use body-parser middleware to parse form data
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
