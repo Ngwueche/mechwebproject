@@ -1,12 +1,10 @@
-import React, { useState } from 'react'
-import heroImage from "../img/site_images/service-hero.jpg"
-import Footer from '../Footer';
-import { useInView } from 'react-intersection-observer';
-import ContactCards from '../ContactCards';
-import axios from 'axios';
-
-
-
+import React, { useState, useRef } from "react";
+import heroImage from "../img/site_images/service-hero.jpg";
+import Footer from "../Footer";
+import { useInView } from "react-intersection-observer";
+import ContactCards from "../ContactCards";
+import emailjs from "@emailjs/browser";
+// import axios from 'axios';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -61,7 +59,6 @@ export default function ContactPage() {
       errors.emailError = "Please enter a valid email address.";
       valid = false;
     }
-
     if (!formData.subject.trim()) {
       errors.subjectError = "Please enter the subject of your enquiry.";
       valid = false;
@@ -70,26 +67,57 @@ export default function ContactPage() {
       errors.messageError = "Please enter a message.";
       valid = false;
     }
-
     setFormErrors(errors);
     return valid;
+  };
+  //emailJS code
+  const form = useRef();
+  function sendEmail(e){
+    e.preventDefault();
+    emailjs
+      .sendForm(
+        import.meta.env.VITE_REACT_APP_YOUR_SERVICE_ID,
+        import.meta.env.VITE_YOUR_TEMPLATE_ID,
+        form.current,
+        import.meta.env.VITE_REACT_APP_YOUR_PUBLIC_KEY
+      )
+      .then(
+        (result) => {
+          console.log(result.text)
+          console.log('Email Sent');
+        },
+        (error) => {
+          console.log(error.text);
+          console.log('Sending failed');
+        }
+      );
   };
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (validateForm()) {
-      axios.post('/contact',{firstName, lastName, phone, email, subject, message})
-      alert('Your request has been received. We will get back to you in a short time.');
+    try {
+      if (validateForm()) {
+        // emailjs function
+        sendEmail(e);
+        e.target.reset();
+        setFormData({ firstName: '', lastName: '', phone: '', email: '', subject: '', message: '' });
+        alert(
+          "Your request has been received. We will get back to you in a short time."
+        );
+      }
+    } catch (error) {
+      alert("Request failed, try again in a few minutes");
+    };
+
   }
-}
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
   if (inView && !isVisible) {
     setIsVisible(true);
   }
+
   return (
     <div>
       <div className=' mx-auto grow bg-gray-900'>
@@ -100,7 +128,7 @@ export default function ContactPage() {
               src={heroImage}
               alt='Hero'
             />
-            <div className='absolute  inset-0 bg-gradient-to-r from-black to-transparent opacity-85' />
+            <div className='absolute inset-0 bg-gradient-to-r from-black to-transparent opacity-85' />
           </div>
           <div className='absolute container mx-auto py-24 px-12'>
             <h1 className='md:text-5xl text-2xl font-bold text-white mb-6 '>
@@ -127,7 +155,11 @@ export default function ContactPage() {
 
       <section className='px-8 bg-black'>
         <div class='flex  justify-center py-20 '>
-          <form class='w-full max-w-lg text-white' onSubmit={handleSubmit}>
+          <form
+            class='w-full max-w-lg text-white'
+            ref={form}
+            onSubmit={handleSubmit}
+          >
             <div class='mx-auto'>
               <div class='grid md:grid-cols-2 gap-4'>
                 <div>
@@ -140,7 +172,11 @@ export default function ContactPage() {
                     value={formData.firstName}
                     onChange={handleChange}
                   />
-                  {formErrors.firstNameError && <p className='text-red-500 text-sm'>{formErrors.firstNameError}</p>}
+                  {formErrors.firstNameError && (
+                    <p className='text-red-500 text-sm'>
+                      {formErrors.firstNameError}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <label class='block mb-2'>Last Name</label>
@@ -152,7 +188,11 @@ export default function ContactPage() {
                     value={formData.lastName}
                     onChange={handleChange}
                   />
-                  {formErrors.lastNameError && <p className='text-red-500 text-sm'>{formErrors.lastNameError}</p>}
+                  {formErrors.lastNameError && (
+                    <p className='text-red-500 text-sm'>
+                      {formErrors.lastNameError}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <label class='block mb-2'>Phone</label>
@@ -164,7 +204,11 @@ export default function ContactPage() {
                     value={formData.phone}
                     onChange={handleChange}
                   />
-                  {formErrors.phoneError && <p className='text-red-500 text-sm'>{formErrors.phoneError}</p>}
+                  {formErrors.phoneError && (
+                    <p className='text-red-500 text-sm'>
+                      {formErrors.phoneError}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <label class='block mb-2'>Email</label>
@@ -176,7 +220,11 @@ export default function ContactPage() {
                     value={formData.email}
                     onChange={handleChange}
                   />
-                  {formErrors.emailError && <p className='text-red-500 text-sm'>{formErrors.emailError}</p>}
+                  {formErrors.emailError && (
+                    <p className='text-red-500 text-sm'>
+                      {formErrors.emailError}
+                    </p>
+                  )}
                 </div>
               </div>
               <div className=' mt-4'>
@@ -189,7 +237,11 @@ export default function ContactPage() {
                   value={formData.subject}
                   onChange={handleChange}
                 />
-                {formErrors.subjectError && <p className='text-red-500 text-sm'>{formErrors.subjectError}</p>}
+                {formErrors.subjectError && (
+                  <p className='text-red-500 text-sm'>
+                    {formErrors.subjectError}
+                  </p>
+                )}
               </div>
               <div className='w-full mt-4'>
                 <label className='block mb-2'>Message</label>
@@ -200,10 +252,17 @@ export default function ContactPage() {
                   value={formData.message}
                   onChange={handleChange}
                 ></textarea>
-                {formErrors.messageError && <p className='text-red-500 text-sm'>{formErrors.messageError}</p>}
+                {formErrors.messageError && (
+                  <p className='text-red-500 text-sm'>
+                    {formErrors.messageError}
+                  </p>
+                )}
               </div>
             </div>
-            <button type='submit' className='px-4 py-2 mt-2 border w-[25%] bg-[#fdd028] hover:bg-transparent'>
+            <button
+              type='submit'
+              className='px-4 py-2 mt-2 border w-[25%] bg-[#fdd028] hover:bg-transparent'
+            >
               Submit
             </button>
           </form>

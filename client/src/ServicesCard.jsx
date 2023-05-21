@@ -3,7 +3,7 @@ import React from 'react'
 export default function ServicesCard(props) {
   return (
     <section>
-      <div className='mx-auto  border flex rounded-2xl text-center flex-col w-[280px]  items-center  overflow-hidden  '>
+      <div className='mx-auto  border flex rounded-2xl text-center flex-col w-[250px] h-[450px]  items-center  overflow-hidden  '>
         <img className='w-[300px] h-[200px] aspect ' src={props.img} />
         <h2 className='text-xl mb-2 mt-4 font-bold'>{props.title}</h2>
         <div className='border-t-2 bg-transparent text-gray-300  flex flex-col'>

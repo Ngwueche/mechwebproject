@@ -27,7 +27,7 @@ export default function ServicesPage() {
             </p>
             <a href="/contact" >
               <button className='mt-8 md:mt-16 mx-auto text-white text-lg md:text-2xl bg-transparent border rounded-md px-2 md:px-4 py-1 md:py-2 hover:bg-primary hover:text-black hover:text-bold'>
-                contact Us
+                Contact Us
               </button>
             </a>
           </div>
@@ -36,13 +36,13 @@ export default function ServicesPage() {
       <section>
         <div className='bg-black p-20 text-white'>
           <div className=''>
-            <p className='text-2xl mb-6  tracking-[5px] line-clamp-3 font-bold'>
+            <p className='text-2xl md:text-3xl mb-6  tracking-[5px] line-clamp-3 font-bold'>
               Build Your High Quality Steel Project{" "}
             </p>
-            <p className='text-2xl mb-6 font-bold tracking-[5px]'>
+            <p className='text-2xl md:text-3xl mb-6 font-bold tracking-[5px]'>
               With Qualified Engineers From{" "}
             </p>
-            <p className='text-2xl font-bold text-primary'>
+            <p className='text-2xl md:text-3xl font-bold text-primary'>
               Mech-Weld<span className='t'>.</span>
             </p>
           </div>

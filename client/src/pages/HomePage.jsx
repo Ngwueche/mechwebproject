@@ -51,7 +51,7 @@ export default function HomePage() {
             </p>
             <a href="/contact" >
               <button className='mt-8 md:mt-16 mx-auto text-white text-lg md:text-2xl bg-transparent border rounded-md px-2 md:px-4 py-1 md:py-2 hover:bg-primary hover:text-black hover:text-bold'>
-                contact Us
+                About Us
               </button>
             </a>
           </div>

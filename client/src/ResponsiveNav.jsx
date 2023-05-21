@@ -1,19 +1,40 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation  } from "react-router-dom";
 import logo from "./img/logo/MechWeld logo5.png";
+import './css/App.css';
+
 
 export default function ResponsiveNav() {
-  const [activeLink, setActiveLink] = useState("");
+  // const [activeLink, setActiveLink] = useState("");
   let [isScrolled, setIsScrolled] = useState(false);
     // const [isToggled, setIsToggled] = useState(false)
-  const handleActiveLink = (event) => {
+  // const handleActiveLink = (event) => {
+  //   setActiveLink(event.target.innerText);
+  // };
+  // const isActiveLink = (className) => {
+  //   return className === activeLink
+  //     ? "bg-blue-900 text-white px-4 py-2 rounded-2xl"
+  //     : "text-[#fdd028]";
+  // };
+
+  // const location = useLocation();
+  // const isActive = (pathname) => {
+  //   return location.pathname === pathname ? 'bg-blue-900 text-white px-4 py-2 rounded-2xl' : '';
+  // };
+
+  const handleActiveLink = (event)=>{
     setActiveLink(event.target.innerText);
   };
-  const isActiveLink = (className) => {
-    return className === activeLink
-      ? "bg-blue-900 text-white px-4 py-2 rounded-2xl"
-      : "text-[#fdd028]";
-  };
+  const isActiveLink = (className)=>{
+    return className === activeLink ?  'bg-blue-900 text-white px-4 py-2 rounded-2xl': 'text-[#fdd028]';
+  }
+  const location = useLocation();
+  const [activeLink, setActiveLink] = useState('');
+
+  useEffect(() => {
+    setActiveLink(location.pathname);
+  }, [location]);
+
 
   useEffect(() => {
     function handleScroll() {
@@ -41,7 +62,7 @@ export default function ResponsiveNav() {
         } transition-colors duration-0 ease-in-out`}
       >
         <div className=' px-4 md:px-8'>
-          <div className='flex  justify-between items-center'>
+          <div className='flex  h-16 justify-between items-center'>
               <div className='md:block'>
                 <NavLink to='/' className=' '>
                   <img
@@ -56,29 +77,25 @@ export default function ResponsiveNav() {
                   <div className='flex gap-12 font-bold text-white'>
                     <NavLink
                       to='/'
-                      onClick={handleActiveLink}
-                      className={isActiveLink("Home")}
+                      className={`font-bold text-lg px-4 py-2 text-primary ${activeLink === '/' ? 'bg-blue-900 text-white px-4 py-2 rounded-2xl' : ''}`}
                     >
                       Home
                     </NavLink>
                     <NavLink
                       to='/about'
-                      onClick={handleActiveLink}
-                      className={isActiveLink("About")}
+                      className= {`font-bold text-lg px-4 py-2 text-primary ${activeLink === '/about' ? 'bg-blue-900 text-white px-4 py-2 rounded-2xl' : ''}`}
                     >
                       About
                     </NavLink>
                     <NavLink
                       to='/services'
-                      onClick={handleActiveLink}
-                      className={isActiveLink("Services")}
+                      className={`font-bold text-lg px-4 py-2 text-primary ${activeLink === '/services' ? 'bg-blue-900 text-white px-4 py-2 rounded-2xl' : ''}`}
                     >
                       Services
                     </NavLink>
                     <NavLink
                       to='/contact'
-                      onClick={handleActiveLink}
-                      className={isActiveLink("Contact")}
+                      className={` font-bold text-lg px-4 py-2 text-primary ${activeLink === '/contact' ? 'bg-blue-900 text-white px-4 py-2 rounded-2xl' : ''}`}
                     >
                       Contact
                     </NavLink>

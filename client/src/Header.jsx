@@ -9,12 +9,6 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   // const [loading, setLoading] = useState('Home')
 
-  const handleActiveLink = (event)=>{
-    setActiveLink(event.target.innerText);
-  };
-  const isActiveLink = (className)=>{
-    return className === activeLink ?  'bg-blue-900 text-white px-4 py-2 rounded-2xl': 'text-[#fdd028]';
-  }
   // const handleLoaded = (event)=>{
   //   setLoading(event.target.innerText);
   // };

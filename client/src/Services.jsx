@@ -13,7 +13,7 @@ export default function Services() {
           {" "}
           Our <span className='text-primary'>Services</span>
         </h2>
-        <div className='mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4  text-gray-300 '>
+        <div className='mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4  text-gray-300 '>
           <ServicesCard
             img={crane}
             title='Machine Hiring'
@@ -36,8 +36,9 @@ export default function Services() {
           />
         </div>
         <a href="/services" >
-          <button className='mx-auto py-1 font-bold px-4 flex mt-8 justify-center text-white hover:bg-primary hover:text-black text-center border rounded-2xl'>Learn More
-          </button>
+        <button className='flex justify-center mt-8 md:mt-16 mx-auto text-white text-lg md:text-2xl bg-transparent border rounded-md px-2 md:px-4 py-1 md:py-2 hover:bg-primary hover:text-black hover:text-bold'>
+                Contact Us
+        </button>
         </a>
       </div>
     </div>

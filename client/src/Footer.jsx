@@ -9,7 +9,7 @@ export default function Footer() {
   return (
     <div>
       <div className='flex flex-col  bg-black'>
-        <div className=' mt-20 flex flex-col md:flex-row border-b-2 items-center gap-8 px-8 md:px-24 '>
+        <div className=' mt-20 flex flex-col md:flex-row border-b-2 items-center gap-8 px-8 md:px-24 pb-12'>
           <div className=''>
             <img src={logo} className='flex w-17 h-12' />
             <p className=' text-start text-white pt-4 font-mono text-sm'>
@@ -65,7 +65,7 @@ export default function Footer() {
           </div>
         </div>
         <div className='bg-[#000000af]'>
-          <footer className='text-white text-center pt-12'>
+          <footer className='text-white mb-4 text-center pt-6'>
             © {year} Mazal-Tov Limited, Inc. All right reserved.
           </footer>
         </div>
